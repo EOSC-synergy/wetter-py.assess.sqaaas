@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.9
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ucyo/wetter-py:
+      branch: master
+      repo: https://github.com/ucyo/wetter-py
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ucyo/wetter-py git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-khaki-greyhound.sh
+        container: qc.acc_skanky-dandelion-wildebeest
+  QC.Doc:
+    repos:
+      github.com/ucyo/wetter-py find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-crimson-badger.sh
+        container: qc.doc_snappy-charcoal-crane
+      github.com/ucyo/wetter-py git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-sangria-earwig.sh
+        container: qc.doc_bumpy-yellow-cow
+      github.com/ucyo/wetter-py markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-aquamarine-serval.sh
+        container: qc.doc_ready-amethyst-capuchin
+  QC.Lic:
+    repos:
+      github.com/ucyo/wetter-py licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-turquoise-dragon.sh
+        container: qc.lic_shaky-magenta-otter
+  QC.Sec:
+    repos:
+      github.com/ucyo/wetter-py bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-salmon-zorse.sh
+        container: qc.sec_craggy-salmon-meerkat
+  QC.Sty:
+    repos:
+      github.com/ucyo/wetter-py flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.cranky-cardinal-havanese.sh
+        container: qc.sty_sunny-orange-badger
+      github.com/ucyo/wetter-py hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-charcoal-nightingale.sh
+        container: qc.sty_clammy-seashell-zebu
+      github.com/ucyo/wetter-py jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-sepia-gibbon.sh
+        container: qc.sty_dorky-thistle-monkey
+  QC.Ver:
+    repos:
+      github.com/ucyo/wetter-py get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-alizarin-dormouse.sh
+        container: qc.ver_lousy-zucchini-mau
+timeout: 5400
